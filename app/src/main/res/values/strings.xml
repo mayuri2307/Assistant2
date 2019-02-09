@@ -1,0 +1,11 @@
+<resources>
+    <string name="Surprise">SURPRISE</string>
+    <string name="app_name">Assistant2</string>
+    <string name="button_string">Click</string>
+    <string name="subscription_key">ca1bdbeeefa3414fa4d9de1c254429da</string>
+    <string name="endpoint">https://centralindia.api.cognitive.microsoft.com/face/v1.0</string>
+    <string name="ButtonText">DETECT</string>
+    <string name="WelcomeText">hi man, how are you?</string>
+    <string name="action_key">Service Key</string>
+    <string name="buffering">Buffering...</string>
+</resources>
