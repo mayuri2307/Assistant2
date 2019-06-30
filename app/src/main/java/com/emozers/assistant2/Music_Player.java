@@ -12,13 +12,19 @@ import java.util.Random;
 public class Music_Player extends AppCompatActivity implements View.OnClickListener
 {
     Button play,pause,stop;
+    String username;
+    String activity_selected;
     MediaPlayer mMediaPlayer;
     int pauseCurrentPosition;
     private String MOOD;
+    boolean engaging;
     @Override
     public void onBackPressed()
     {
         Intent i=new Intent(Music_Player.this,Rating_Activity.class);
+        i.putExtra("Engaging",engaging);
+        i.putExtra("Username",username);
+        i.putExtra("Activity",activity_selected);
         startActivity(i);
         finish();
     }
@@ -28,6 +34,9 @@ public class Music_Player extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music__player);
         Intent i = getIntent();
+        activity_selected=i.getStringExtra("Activity");
+        username=i.getStringExtra("Username");
+        engaging=i.getBooleanExtra("Engaging",false);
         MOOD= i.getStringExtra("Mood");
         play=(Button)findViewById(R.id.btn_play);
         pause=(Button)findViewById(R.id.btn_pause);

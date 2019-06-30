@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "125708120301",
+    "firebase_url": "https://assistant2-b5e39.firebaseio.com",
+    "project_id": "assistant2-b5e39",
+    "storage_bucket": "assistant2-b5e39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125708120301:android:b6b4dcd4437b2a0a",
+        "android_client_info": {
+          "package_name": "com.emozers.assistant2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125708120301-iki2fiet09sc14dm7onfguf9acrlnhn5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvv_IwCpbVoZXmd6e7jNG1Hsax15y8W-w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

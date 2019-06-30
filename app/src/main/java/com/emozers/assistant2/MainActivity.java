@@ -26,6 +26,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.microsoft.projectoxford.face.FaceServiceClient;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
 import com.microsoft.projectoxford.face.contract.Emotion;
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity
 
     private final String apiEndpoint = "https://centralindia.api.cognitive.microsoft.com/face/v1.0";
     private String filepath;
+    private String email,username;
     private Bitmap bm_to_send;
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity
 
     private final int PICK_IMAGE = 1;
     private ProgressDialog detectionProgressDialog;
+    DatabaseReference mDatabaseReference;
     private void SaveImage(Bitmap finalBitmap)
     {
         String root = Environment.getExternalStorageDirectory().toString();
@@ -147,6 +152,10 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sid);
+        Intent i=getIntent();
+        mDatabaseReference=FirebaseDatabase.getInstance().getReference();
+        email=i.getStringExtra("Email");
+        username=i.getStringExtra("Username");
         this.imageView = (ImageView)this.findViewById(R.id.imageView1);
         Button photoButton = (Button) this.findViewById(R.id.detect_button);
         photoButton.setOnClickListener(new View.OnClickListener() {
@@ -315,10 +324,16 @@ public class MainActivity extends AppCompatActivity
         {
             for (Face face : faces)
             {
-                Log.d("face_and_face",String.valueOf(face.faceAttributes.emotion.neutral));
+                //Log.d("face_and_face",String.valueOf(face.faceAttributes.emotion.));
+                emotions emo=new emotions(String.valueOf(face.faceAttributes.emotion.neutral),String.valueOf(face.faceAttributes.emotion.anger),String.valueOf(face.faceAttributes.emotion.contempt),String.valueOf(face.faceAttributes.emotion.disgust),String.valueOf(face.faceAttributes.emotion.fear),String.valueOf(face.faceAttributes.emotion.happiness),String.valueOf(face.faceAttributes.emotion.sadness),String.valueOf(face.faceAttributes.emotion.surprise));
                 Intent i=new Intent(MainActivity.this,MessageListActivity.class);
-
-                //i.putExtra("", "value2");
+                photo_data pd=new photo_data(Double.toString(face.faceAttributes.smile),Double.toString(face.faceAttributes.facialHair.beard),Double.toString(face.faceAttributes.facialHair.moustache),Double.toString(face.faceAttributes.facialHair.sideburns));
+                String id_key=mDatabaseReference.child("Users").child(username).child("Photo_Data").push().getKey();
+                //mDatabaseReference.child("Users").child(username).child("Photo_Data").push().setValue(pd);
+                mDatabaseReference.child("Users").child(username).child("Photo_Data").child(id_key).setValue(pd);
+                mDatabaseReference.child("Users").child(username).child("Photo_Data").child(id_key).child("Emotions").push().setValue(emo);
+                i.putExtra("Email",email);
+                i.putExtra("Username",username);
                 //Bundle basket= new Bundle();
                 //basket.putString("Neutral_Mood",face.faceAttributes.emotion.neutral);
                 String ans=getEmotion(face.faceAttributes.emotion);

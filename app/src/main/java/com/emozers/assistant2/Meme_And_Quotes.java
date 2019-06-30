@@ -10,10 +10,16 @@ import java.util.Random;
 public class Meme_And_Quotes extends AppCompatActivity
 {
     private String MOOD="";
+    String activity_selected;
+    boolean engaging;
+    String username;
     @Override
     public void onBackPressed()
     {
         Intent i=new Intent(Meme_And_Quotes.this,Rating_Activity.class);
+        i.putExtra("Engaging",engaging);
+        i.putExtra("Username",username);
+        i.putExtra("Activity",activity_selected);
         startActivity(i);
         finish();
     }
@@ -23,7 +29,10 @@ public class Meme_And_Quotes extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meme__and__quotes);
         Intent i = getIntent();
+        activity_selected=i.getStringExtra("Activity");
+        engaging=i.getBooleanExtra("Engaging",false);
         MOOD= i.getStringExtra("Mood");
+        username=i.getStringExtra("Username");
         Random rand = new Random();
         int random_index = rand.nextInt(5);
         ImageView iv=(ImageView)findViewById(R.id.iv_for_memes);

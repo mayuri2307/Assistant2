@@ -15,6 +15,9 @@ import android.widget.VideoView;
 public class video_player extends AppCompatActivity
 {
     private int mCurrentPosition = 0;
+    boolean engaging;
+    String activity_selected;
+    String username;
     private static final String PLAYBACK_TIME = "play_time";
     private static final String VIDEO_SAMPLE = "https://developers.google.com/training/images/tacoma_narrows.mp4";
     private VideoView mVideoView;
@@ -23,6 +26,9 @@ public class video_player extends AppCompatActivity
     public void onBackPressed()
     {
         Intent i=new Intent(video_player.this,Rating_Activity.class);
+        i.putExtra("Engaging",engaging);
+        i.putExtra("Username",username);
+        i.putExtra("Activity",activity_selected);
         startActivity(i);
         finish();
     }
@@ -122,6 +128,10 @@ public class video_player extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
         mVideoView = findViewById(R.id.videoview);
+        Intent i=getIntent();
+        activity_selected=i.getStringExtra("Activity");
+        username=i.getStringExtra("Username");
+        engaging=i.getBooleanExtra("Engaging",false);
         mBufferingTextView = findViewById(R.id.buffering_textview);
         if (savedInstanceState != null)
         {

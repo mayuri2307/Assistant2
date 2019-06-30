@@ -4,6 +4,10 @@
 
     <uses-feature android:name="android.hardware.camera" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-feature android:name="android.hardware.location.gps" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -15,13 +19,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".DetectionActivity" />
         <activity android:name=".Main2Activity" />
         <activity android:name=".MessageListActivity" />
@@ -29,7 +35,9 @@
         <activity android:name=".Meme_And_Quotes" />
         <activity android:name=".Grapher" />
         <activity android:name=".video_player" />
-        <activity android:name=".Rating_Activity"></activity>
+        <activity android:name=".Rating_Activity" />
+        <activity android:name=".get_user_data" />
+        <activity android:name=".user_profile"></activity>
     </application>
 
 </manifest>
